@@ -2,7 +2,7 @@ import styles from './autocomplete.css';
 
 import React, { Component } from 'react';
 
-import LazyLoad from '../lazyload/index';
+import LazyLoad from '../lazyload/lazyload';
 
 export default class AutoComplete extends Component {
 

@@ -16,55 +16,32 @@ module.exports = {
         extensions: ['.js', '.jsx']
     },
     module: {
-        // rules: [
-        //   {test: /\.(js|jsx)$/, use: 'babel-loader'}
-        // ],
-
-        loaders: [
+        rules: [
             {
-                test: /\.js|jsx$/,
-                 loader: 'babel-loader',
-                 query: {
-                   presets: ['react']
-                 }
+                test: /\.jsx?$/,
+                loader: "babel-loader",
+                options: {
+                    presets: ['react']
+                }
             },
-            // {
-            //     test: /\.css$/,
-            //     loader: ExtractTextPlugin.extract('style-loader', 'css-loader?localIdentName=[name]__[local]___[hash:base64:5]!postcss-loader')
-            // },
-
-            // {
-            //     test: /\.css$/,
-            //     loader: ExtractTextPlugin.extract({
-            //         fallbackLoader: "css-loader?localIdentName=[name]__[local]___[hash:base64:5]!postcss-loader",
-            //         loader: "style-loader"
-            //     })
-            // },
 
             {
                 test: /\.css$/,
                 loader: ExtractTextPlugin.extract({
-                    // fallbackLoader: "style-loader",
+                    fallbackLoader: "style-loader",
                     loader: "css-loader?localIdentName=[name]__[local]___[hash:base64:5]!postcss-loader"
-                })
+                }),
+
+                exclude: [
+                  path.resolve(__dirname, "modules/common")
+                ]
             },
+        ],
 
-
-
-
-            // { test: /\.css$/, loader: ExtractTextPlugin.extract({
-            //     notExtractLoader: "style-loader",
-            //     loader: "css-loader?sourceMap",
-            //     publicPath: "../"
-            // }) },
-
-        ]
     },
 
-    // Provide the Local Scope plugin to postcss-loader:
-    // postcss: [ require('postcss-local-scope') ],
-
     devtool: "source-map",
+
     plugins: [
 
         new ExtractTextPlugin({
@@ -76,6 +53,7 @@ module.exports = {
         new webpack.LoaderOptionsPlugin({
             // test: /\.xxx$/, // may apply this only for some modules
             options: {
+                // Provide the Local Scope plugin to postcss-loader:
                 postcss: [ require('postcss-local-scope') ],
             }
         })
@@ -84,5 +62,9 @@ module.exports = {
         // new ReactToHtmlPlugin('index.html', 'index.js', {
         //   template: ejs.compile(fs.readFileSync(__dirname + '/src/template.ejs', 'utf-8'))
         // })
-    ]
+    ],
+
+    externals: {
+
+    }
 }
