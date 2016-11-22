@@ -1,0 +1,12 @@
+@import url(../common/common.css)
+.title{
+    color: blue;
+    font-weight: bold;
+}
+.text{
+    color: red;
+    font-weight: bold;
+}
+.content{
+    background: #ccc;
+}
