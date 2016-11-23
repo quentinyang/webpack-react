@@ -1,4 +1,7 @@
 @import url(../common/common.css)
+.lazyload{
+    background: #ccc;
+}
 .title{
     color: red;
 }
