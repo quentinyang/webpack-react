@@ -1,1 +1,11 @@
-console.log(123);
+// import 'babel-polyfill';
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './biz/app';
+// import './index.css';
+
+ReactDOM.render(
+  <App />,
+  document.getElementById('root')
+);
