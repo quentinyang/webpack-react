@@ -2,7 +2,7 @@
 
 .lazyload{
     /*background: blue;*/
-    /*background: resolve(./loading.gif) no-repeat 0 0;*/
+    background: url("./loading.gif") no-repeat 0 0;
 }
 .title{
     color: red;

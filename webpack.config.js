@@ -36,7 +36,7 @@ var webpackConfig = {
                 }),
 
                 exclude: [
-                  path.resolve(__dirname, "modules/common")
+                  // path.resolve(__dirname, "modules/common")//TODO::remove
                 ]
             },
 
@@ -46,7 +46,7 @@ var webpackConfig = {
 
             {
                 test: /\.gif$/,
-                loader: "url-loader",
+                loader: "url-loader?limit=100000",
                 query: {mimetype: "image/gif"},
             },
         ]
@@ -56,6 +56,9 @@ var webpackConfig = {
     devtool: "source-map",
 
     plugins: [
+
+        // TODO::[HMR: hot module replacement](https://webpack.js.org/guides/hmr-react/)
+        // new webpack.HotModuleReplacementPlugin(),
 
         new ExtractTextPlugin({
             filename: "css/[name].css",//[id]-[contenthash]
