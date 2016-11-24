@@ -1,6 +1,8 @@
-@import url(../common/common.css)
+@import url(../common/global.css);
+
 .lazyload{
-    background: #ccc;
+    /*background: blue;*/
+    /*background: resolve(./loading.gif) no-repeat 0 0;*/
 }
 .title{
     color: red;

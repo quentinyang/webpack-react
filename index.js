@@ -2,10 +2,10 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './biz/app';
+import AutoComplete from './modules/autocomplete/autocomplete';
 // import './index.css';
 
 ReactDOM.render(
-  <App />,
+  <AutoComplete />,
   document.getElementById('root')
 );

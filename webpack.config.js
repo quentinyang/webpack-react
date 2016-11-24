@@ -6,10 +6,10 @@ const webpack = require('webpack');
 
 var webpackConfig = {
     entry:{
-        common: ['react', 'react-dom'],
+        vendor: ['react', 'react-dom'],//TODO::vendor
         biz: './biz.js',
         index: './index.js',
-        },
+    },
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'js/[name].js'
@@ -39,7 +39,17 @@ var webpackConfig = {
                   path.resolve(__dirname, "modules/common")
                 ]
             },
+
+
         ],
+        loaders: [
+
+            {
+                test: /\.gif$/,
+                loader: "url-loader",
+                query: {mimetype: "image/gif"},
+            },
+        ]
 
     },
 
@@ -49,7 +59,7 @@ var webpackConfig = {
 
         new ExtractTextPlugin({
             filename: "css/[name].css",//[id]-[contenthash]
-            // disable: false,
+            disable: false,
             allChunks: true
         }),
 
@@ -66,11 +76,7 @@ var webpackConfig = {
             filename: "common.js",
         }),
 
-        new webpack.DefinePlugin({
-          'process.env': {
-            NODE_ENV: JSON.stringify('production')
-          }
-        }),
+
 
         // new ReactToHtmlPlugin('index.html', 'index.js', {
         //   template: ejs.compile(fs.readFileSync(__dirname + '/src/template.ejs', 'utf-8'))
@@ -84,8 +90,14 @@ var webpackConfig = {
     }
 };
 
-if(process.env.NODE_ENV == 'production') {
+if (process.env.NODE_ENV == 'production') {
     var optimizations = [
+        new webpack.DefinePlugin({
+          'process.env': {
+            NODE_ENV: JSON.stringify('production')
+          }
+        }),
+
         new webpack.optimize.UglifyJsPlugin({
             compress: {
                 warnings: false,

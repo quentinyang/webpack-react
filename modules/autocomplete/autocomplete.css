@@ -1,4 +1,8 @@
-@import url(../common/common.css)
+@import url(../common/global.css);
+
+.autocomplete{
+    background: red;
+}
 .title{
     color: blue;
     font-weight: bold;
