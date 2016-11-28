@@ -20,3 +20,7 @@
 
     直接用浏览器打开`index.html`文件，或者配置服务器打开`index.html`文件。
 
+
+## 参考
+1. [Webpack v2.x](https://webpack.js.org/)
+

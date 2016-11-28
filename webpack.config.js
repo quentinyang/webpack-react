@@ -40,16 +40,34 @@ var webpackConfig = {
                 ]
             },
 
-
-        ],
-        loaders: [
-
             {
                 test: /\.gif$/,
-                loader: "url-loader?limit=100000",
-                query: {mimetype: "image/gif"},
+                loader: "url-loader",
+                query: {
+                    limit: 100000,
+                    name: 'image/[name].[ext]'
+                },
             },
-        ]
+
+            {
+                test: /\.png$/,
+                loader: "url-loader",
+                query: {
+                    limit: 10,
+                    name: 'image/[name].[ext]'
+                },
+            },
+
+
+        ],
+        // loaders: [
+
+        //     {
+        //         test: /\.gif$/,
+        //         loader: "url-loader?limit=10",
+        //         query: {mimetype: "image/gif"},
+        //     },
+        // ]
 
     },
 
