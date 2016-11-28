@@ -3,7 +3,17 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 const webpack = require('webpack');
 
 // var CompressionPlugin = require("compression-webpack-plugin");
-
+var production = (process.env.NODE_ENV == 'production');
+var jsFormatter = 'js/[name].js';
+var imageFormatter = 'image/[name].[ext]';
+var cssFormatter = 'css/[name].css';
+var commonFormatter = 'common.js';
+if (production) {
+    jsFormatter = 'js/[name]-[chunkhash:10].js';
+    imageFormatter = 'image/[name]-[hash:10].[ext]';
+    cssFormatter = "css/[name]-[contenthash:10].css";
+    commonFormatter = "common-[chunkhash:10].js";
+}
 var webpackConfig = {
     entry:{
         vendor: ['react', 'react-dom'],//TODO::vendor
@@ -12,7 +22,8 @@ var webpackConfig = {
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'js/[name].js'
+        filename: jsFormatter,//diff between dev and production
+        chunkFilename: "[id].[chunkhash].bundle.js",
     },
     resolve: {
         extensions: ['.js', '.jsx']
@@ -41,33 +52,16 @@ var webpackConfig = {
             },
 
             {
-                test: /\.gif$/,
+                test: /\.(jpe?g|gif|png)$/,
+                // loader: "url-loader",
                 loader: "url-loader",
                 query: {
-                    limit: 100000,
-                    name: 'image/[name].[ext]'
-                },
+                    limit: 10000,
+                    name: imageFormatter,//diff between dev and production
+                }
             },
-
-            {
-                test: /\.png$/,
-                loader: "url-loader",
-                query: {
-                    limit: 10,
-                    name: 'image/[name].[ext]'
-                },
-            },
-
 
         ],
-        // loaders: [
-
-        //     {
-        //         test: /\.gif$/,
-        //         loader: "url-loader?limit=10",
-        //         query: {mimetype: "image/gif"},
-        //     },
-        // ]
 
     },
 
@@ -79,7 +73,8 @@ var webpackConfig = {
         // new webpack.HotModuleReplacementPlugin(),
 
         new ExtractTextPlugin({
-            filename: "css/[name].css",//[id]-[contenthash]
+            // filename: "css/[name].css",//[id]-[contenthash]
+            filename: cssFormatter,//diff between dev and production
             disable: false,
             allChunks: true
         }),
@@ -94,10 +89,8 @@ var webpackConfig = {
 
         new webpack.optimize.CommonsChunkPlugin({
             name: 'common',
-            filename: "common.js",
+            filename: commonFormatter,
         }),
-
-
 
         // new ReactToHtmlPlugin('index.html', 'index.js', {
         //   template: ejs.compile(fs.readFileSync(__dirname + '/src/template.ejs', 'utf-8'))
@@ -112,13 +105,17 @@ var webpackConfig = {
 };
 
 if (process.env.NODE_ENV == 'production') {
-    var optimizations = [
+
+    webpackConfig.plugins.push(
         new webpack.DefinePlugin({
           'process.env': {
             NODE_ENV: JSON.stringify('production')
           }
-        }),
+        })
+    );
 
+    // Uglify
+    webpackConfig.plugins.push(
         new webpack.optimize.UglifyJsPlugin({
             compress: {
                 warnings: false,
@@ -126,18 +123,26 @@ if (process.env.NODE_ENV == 'production') {
             output: {
                 comments: false,
             },
-        }),
+        })
+    );
 
-        // new CompressionPlugin({
-        //         asset: "[path].gz[query]",
-        //         algorithm: "gzip",
-        //         test: /\.js$|\.html$/,
-        //         threshold: 10240,
-        //         minRatio: 0.8
-        // }),
-    ];
+    // Generate manifest json.
+    var ManifestPlugin = require('webpack-manifest-plugin');
+    webpackConfig.plugins.push(new ManifestPlugin({
+        fileName: 'manifest.json'
+    }));
 
-    webpackConfig.plugins = webpackConfig.plugins.concat(optimizations);
+    // webpackConfig.plugins.push(
+    //     new CompressionPlugin({
+    //             asset: "[path].gz[query]",
+    //             algorithm: "gzip",
+    //             test: /\.js$|\.html$/,
+    //             threshold: 10240,
+    //             minRatio: 0.8
+    //     })
+    // );
+
+
 }
 
 module.exports = webpackConfig;
