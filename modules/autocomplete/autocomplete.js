@@ -9,10 +9,12 @@ export default class AutoComplete extends Component {
     return (
       <div className={styles.autocomplete }>
         <div className={styles.title}>AutoComplete</div>
-        <p className={ styles.text }>AutoComplete Descrption!</p>
-        <div className={styles.content}>This is content.</div>
+        <p>File@<code>modules/autocomplete/autocomplete.js</code></p>
+        <div className={styles.content}>
+          <span className={styles.text}>This is content.</span>
+          <input type="text" className={styles.text} />
+        </div>
         <img src={image} />
-        <LazyLoad/>
       </div>
     );
   }

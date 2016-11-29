@@ -43,7 +43,7 @@ var webpackConfig = {
                 test: /\.css$/,
                 loader: ExtractTextPlugin.extract({
                     fallbackLoader: "style-loader",
-                    loader: "css-loader?localIdentName=[name]__[local]___[hash:base64:5]!postcss-loader"
+                    loader: "css-loader?localIdentName=[path]_[name]__[local]!postcss-loader"
                 }),
 
                 exclude: [
@@ -84,6 +84,7 @@ var webpackConfig = {
             options: {
                 // Provide the Local Scope plugin to postcss-loader:
                 postcss: [ require('postcss-local-scope') ],
+                context: __dirname,
             }
         }),
 

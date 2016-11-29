@@ -1,6 +1,7 @@
 @import url(../common/global.css);
 
 .list{
+    border: 1px dashed #57f5a9;
     line-height: 16px;
     font-size: 12px;
 }

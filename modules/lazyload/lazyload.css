@@ -3,10 +3,12 @@
 .lazyload{
     /*background: blue;*/
     background: url("./loading.png") no-repeat 0 0;
+    border: 2px dashed #ea8bbd;
 }
 .title{
-    color: red;
+    color: #ea8bbd;
+    font-size: 16px;
 }
 .text{
-    color: blue;
+    color: #dc2384;
 }

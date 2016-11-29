@@ -9,6 +9,7 @@ export default class List extends Component {
     return (
       <ul className={styles.list}>
         <ListItem/>
+        <ListItem/>
       </ul>
     );
   }

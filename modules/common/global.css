@@ -1,4 +1,4 @@
-body{
+body,p,div{
     margin: 0;
     padding: 0;
 }
@@ -7,4 +7,8 @@ h1{
 }
 h2{
     font-size: 16px;
+}
+ul,li{
+    margin: 0;
+    padding: 0;
 }
