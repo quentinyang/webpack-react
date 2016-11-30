@@ -14,16 +14,16 @@ export default class App extends Component {
     return (
       <div className={styles.app}>
         <div className={styles.header}>
-          <h2>Welcome to React!!</h2>
+          <h2>Welcome to Webpack + React!!</h2>
         </div>
         <p className={styles.content}>
           To get started, edit <code>src/App.js</code> and save to reload!
         </p>
-        <hr/>
+
         <AutoComplete/>
-        <hr/>
+
         <LazyLoad/>
-        <hr/>
+
         <Box>
           <ListView/>
         </Box>

@@ -15,7 +15,7 @@ export default class LazyLoad extends Component {
         <div className={styles.title}>Lazyload</div>
         <img className={styles.image} src={image}/>
         <p className={ styles.text }>Lazy Load Description!</p>
-        <img className={styles.image} src={image2}/>
+        <img className={styles.image+' '+styles.bigsize} src={image2}/>
       </div>
     );
   }

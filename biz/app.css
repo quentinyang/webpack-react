@@ -6,6 +6,6 @@
     border: 1px solid #ccc;
 }
 
-.app :global(.modules-autocomplete-_autocomplete__autocomplete){
-    border: 5px dashed #ccc;
+.app :global(.modules-autocomplete-autocomplete-autocomplete){
+    border: 3px dashed #ccc;
 }

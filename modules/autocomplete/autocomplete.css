@@ -1,6 +1,7 @@
 @import url(../common/global.css);
 
 .autocomplete{
+    margin: 10px 0;
     border: 2px dashed #57f5a9;
     font-size:16px;
 }

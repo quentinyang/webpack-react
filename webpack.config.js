@@ -8,12 +8,16 @@ var jsFormatter = 'js/[name].js';
 var imageFormatter = 'image/[name].[ext]';
 var cssFormatter = 'css/[name].css';
 var commonFormatter = 'common.js';
+var publicPath = "dist/";//TODO::Config
+
 if (production) {
     jsFormatter = 'js/[name]-[chunkhash:10].js';
     imageFormatter = 'image/[name]-[hash:10].[ext]';
     cssFormatter = "css/[name]-[contenthash:10].css";
     commonFormatter = "common-[chunkhash:10].js";
+    publicPath = "dist/"
 }
+
 var webpackConfig = {
     entry:{
         vendor: ['react', 'react-dom'],//TODO::vendor
@@ -24,7 +28,9 @@ var webpackConfig = {
         path: path.resolve(__dirname, 'dist'),
         filename: jsFormatter,//diff between dev and production
         chunkFilename: "[id].[chunkhash].bundle.js",
+        publicPath: publicPath,
     },
+
     resolve: {
         extensions: ['.js', '.jsx']
     },
@@ -43,7 +49,7 @@ var webpackConfig = {
                 test: /\.css$/,
                 loader: ExtractTextPlugin.extract({
                     fallbackLoader: "style-loader",
-                    loader: "css-loader?localIdentName=[path]_[name]__[local]!postcss-loader"
+                    loader: "css-loader?localIdentName=[path][name]-[local]!postcss-loader"
                 }),
 
                 exclude: [
@@ -83,7 +89,8 @@ var webpackConfig = {
             // test: /\.xxx$/, // may apply this only for some modules
             options: {
                 // Provide the Local Scope plugin to postcss-loader:
-                postcss: [ require('postcss-local-scope') ],
+                postcss: [require('postcss-local-scope')],
+                // if not set context, [path] would be empty.
                 context: __dirname,
             }
         }),

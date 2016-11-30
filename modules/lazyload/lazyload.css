@@ -1,7 +1,7 @@
 @import url(../common/global.css);
 
 .lazyload{
-    /*background: blue;*/
+    margin: 10px 0;
     background: url("./loading.png") no-repeat 0 0;
     border: 2px dashed #ea8bbd;
 }
@@ -15,4 +15,8 @@
 .image{
     width: 30px;
     height: 30px;
+}
+.image.bigsize{
+    width: 100px;
+    height: 100px;
 }
