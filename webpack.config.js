@@ -39,7 +39,8 @@ var webpackConfig = {
             {
                 test: /\.jsx?$/,
                 loader: "babel-loader",
-                exclude: /node_modules/,
+                // do not exclude, because `webpack-react` itself is under `node_modules` folder
+                // exclude: /node_modules/,
                 options: {
                     presets: ['es2015', 'react']
                 },
