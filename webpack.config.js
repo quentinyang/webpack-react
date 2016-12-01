@@ -21,7 +21,7 @@ if (production) {
 
 var webpackConfig = {
     entry:{
-        vendor: ['react', 'react-dom'],//TODO::vendor
+        // vendor: ['react', 'react-dom'],//TODO::vendor
         /* fill others later. e.g: index: './app/index.js',*/
     },
     output: {

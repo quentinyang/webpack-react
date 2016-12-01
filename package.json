@@ -2,7 +2,7 @@
   "name": "webpack-react",
   "version": "1.0.0",
   "description": "",
-  "main": "webpack.config.js",
+  "main": "webpackreact.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "NODE_ENV=dev webpack --progress --colors",
