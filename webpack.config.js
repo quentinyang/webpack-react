@@ -9,6 +9,7 @@ var imageFormatter = 'image/[name].[ext]';
 var cssFormatter = 'css/[name].css';
 var commonFormatter = 'common.js';
 var publicPath = "dist/";//TODO::Config
+var relativeDir = process.cwd();//__dirname
 
 if (production) {
     jsFormatter = 'js/[name]-[chunkhash:10].js';
@@ -21,11 +22,10 @@ if (production) {
 var webpackConfig = {
     entry:{
         vendor: ['react', 'react-dom'],//TODO::vendor
-        biz: './biz.js',
-        index: './index.js',
+        /* fill others later. e.g: index: './app/index.js',*/
     },
     output: {
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve(relativeDir, 'dist'),
         filename: jsFormatter,//diff between dev and production
         chunkFilename: "[id].[chunkhash].bundle.js",
         publicPath: publicPath,
@@ -53,7 +53,7 @@ var webpackConfig = {
                 }),
 
                 exclude: [
-                  // path.resolve(__dirname, "modules/common")//TODO::remove
+                  // path.resolve(relativeDir, "modules/common")//TODO::remove
                 ]
             },
 
@@ -91,7 +91,7 @@ var webpackConfig = {
                 // Provide the Local Scope plugin to postcss-loader:
                 postcss: [require('postcss-local-scope')],
                 // if not set context, [path] would be empty.
-                context: __dirname,
+                context: relativeDir,
             }
         }),
 
@@ -101,7 +101,7 @@ var webpackConfig = {
         }),
 
         // new ReactToHtmlPlugin('index.html', 'index.js', {
-        //   template: ejs.compile(fs.readFileSync(__dirname + '/src/template.ejs', 'utf-8'))
+        //   template: ejs.compile(fs.readFileSync(relativeDir + '/src/template.ejs', 'utf-8'))
         // })
 
     ],
@@ -111,6 +111,18 @@ var webpackConfig = {
         // "react-dom": 'react-dom',
     }
 };
+
+// fill others here.
+var fstool = require('./utils/fstool');
+var entries = fstool.scanDir('./app');// TODO::config dir path
+var entryInfo;
+entries.forEach(function(entry, i) {
+    entryInfo = path.parse(entry);
+    if (entryInfo.ext == '.js') {
+        webpackConfig.entry[entryInfo.name] = entry;
+    }
+});
+// console.log(webpackConfig.entry);
 
 if (process.env.NODE_ENV == 'production') {
 
@@ -149,7 +161,6 @@ if (process.env.NODE_ENV == 'production') {
     //             minRatio: 0.8
     //     })
     // );
-
 
 }
 
