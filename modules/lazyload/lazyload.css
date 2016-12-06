@@ -1,5 +1,3 @@
-@import url(../common/global.css);
-
 .lazyload{
     margin: 10px 0;
     background: url("./loading.png") no-repeat 0 0;
